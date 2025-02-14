@@ -1,0 +1,18 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Katalog lokalit</h1>
+<p><a class="btn btn-primary" href="{{ url_for('add_area') }}" role="button">Pridat lokalitu</a></p>
+
+{% from 'bootstrap5/table.html' import render_table %}
+
+{{ render_table(
+                areas,
+                titles=[('title', 'Nazev'), ('description', 'Popis'), ('created', 'Datum vytvoreni')],
+                show_actions=True,
+                actions_title='',
+                edit_url=('edit_area', [('area_id', ':id')]),
+                delete_url=('delete_area', [('area_id', ':id')]),
+) }}
+
+{% endblock %}

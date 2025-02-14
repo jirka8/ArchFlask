@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Upravit lokalitu</h1>
+<p><a class="btn btn-primary" href="{{ url_for('areas') }}" role="button">Zpet na prehled lokalit</a></p>
+{% from 'bootstrap5/form.html' import render_form %}
+{{ render_form(form) }}
+{% endblock %}
