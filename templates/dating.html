@@ -2,7 +2,7 @@
 
 {% block content %}
 <h1>Datace nalezu</h1>
-<p><a class="btn btn-primary" href="{{ url_for('add_dating') }}" role="button">Pridat dataci</a></p>
+<p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_dating') }}" role="button">Pridat novou dataci</a></p>
 
 {% from 'bootstrap5/table.html' import render_table %}
 
@@ -62,37 +62,14 @@
                 </div>
             </td>
             <td>
-                <p>
-                    <a class="icon-link" href="{{ url_for('edit_dating', dating_id=d.id) }}">
-                        <svg class="bi" aria-hidden="true"><use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#pencil-fill"></use></svg>
-                    </a>
-                    <a class="icon-link" href="{{ url_for('delete_dating', dating_id=d.id) }}"> <!--data-bs-toggle="modal" data-bs-target="#deleteModal"-->
-                        <svg class="bi" aria-hidden="true"><use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#trash-fill"></use></svg>
-                    </a>
-                </p>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('edit_dating', dating_id=d.id) }}" role="button">Upravit</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('delete_dating', dating_id=d.id) }}" role="button">Smazat</a>
+                </div>
             </td>
         </tr>
     {% endfor %}
     </tbody>
 </table>
-
-<!-- Modal -->
-<div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header bg-danger text-white">
-                <h5 class="modal-title" id="deleteModalLabel">Potvrdit smazani</h5>
-                <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal" aria-label="Zavrit"></button>
-            </div>
-            <div class="modal-body">
-                <p class="mb-0">Opravdu chcete smazat tuto polozku? Polozka bude smazana trvale z databaze.</p>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Zrusit</button>
-                <button type="button" class="btn btn-danger" id="confirmDelete">Smazat</button>
-            </div>
-        </div>
-    </div>
-</div>
 
 {% endblock %}

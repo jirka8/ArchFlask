@@ -1,3 +1,5 @@
+from random import choices
+
 from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, flash, redirect, url_for
 from database import db_session
@@ -85,11 +87,25 @@ def delete_area(area_id):
 #routes dating
 @app.route('/dating')
 def dating():
-    dating = Dating.query.filter(Dating.parent_id.is_(None)).all()
+    dating = Dating.query.filter(Dating.parent_id == 0).all()
     return render_template('dating.html', dating=dating)
 @app.route('/dating/add', methods=['GET', 'POST'])
 def add_dating():
-    return render_template('add_dating.html')
+    # some operations for parent_id select box
+    dating = Dating.query.filter(Dating.parent_id == 0).all()
+    choices = [(0, 'Vyberte nadrazenou kategorii')]
+    for d in dating:
+        choices.extend(Dating.select_choices(d))
+    form = DatingForm(request.form)
+    form.parent_id.choices = choices
+
+    if request.method == 'POST' and form.validate():
+        d = Dating(form.parent_id.data, form.title.data)
+        db_session.add(d)
+        db_session.commit()
+        flash('Datace byla uspesne pridana.', 'success')
+        return redirect(url_for('dating'))
+    return render_template('add_dating.html', dating=dating, form=form)
 @app.route('/dating/edit/<dating_id>', methods=['GET', 'POST'])
 def edit_dating(dating_id):
     return render_template('edit_dating.html')
