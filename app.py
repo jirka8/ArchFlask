@@ -1,5 +1,4 @@
 from random import choices
-
 from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, flash, redirect, url_for
 from database import db_session
@@ -16,6 +15,14 @@ csrf = CSRFProtect(app)
 
 # bootstrap
 bootstrap = Bootstrap5(app)
+
+def select_parents(model):
+    p = [(0, 'Vyberte nadrazenou kategorii')]
+    if model == 'dating':
+        dating = Dating.query.filter(Dating.parent_id == 0).all()
+        for d in dating:
+            p.extend(Dating.select_choices(d))
+    return p
 
 # routes
 @app.route('/')
@@ -91,13 +98,9 @@ def dating():
     return render_template('dating.html', dating=dating)
 @app.route('/dating/add', methods=['GET', 'POST'])
 def add_dating():
-    # some operations for parent_id select box
-    dating = Dating.query.filter(Dating.parent_id == 0).all()
-    choices = [(0, 'Vyberte nadrazenou kategorii')]
-    for d in dating:
-        choices.extend(Dating.select_choices(d))
     form = DatingForm(request.form)
-    form.parent_id.choices = choices
+    parents = select_parents('dating')
+    form.parent_id.choices = parents
 
     if request.method == 'POST' and form.validate():
         d = Dating(form.parent_id.data, form.title.data)
@@ -108,7 +111,27 @@ def add_dating():
     return render_template('add_dating.html', dating=dating, form=form)
 @app.route('/dating/edit/<dating_id>', methods=['GET', 'POST'])
 def edit_dating(dating_id):
-    return render_template('edit_dating.html')
+    dating = Dating.query.get(dating_id)
+    if dating:
+        form = DatingForm(request.form)
+        parents = select_parents('dating')
+        form.parent_id.choices = parents
+
+        if request.method == 'POST' and form.validate():
+            dating.title = form.title.data
+            dating.parent_id = form.parent_id.data
+            db_session.add(dating)
+            db_session.commit()
+            flash('Datace byla uspesne upravena.', 'success')
+            return redirect(url_for('dating'))
+
+        form.title.data = dating.title
+        form.parent_id.data = dating.parent_id
+
+        return render_template('edit_dating.html', form=form)
+    else:
+        flash('Datace nenalezena!', 'error')
+        return redirect(url_for('dating'))
 @app.route('/dating/delete/<dating_id>', methods=['GET', 'POST'])
 def delete_dating(dating_id):
     return True

@@ -1,5 +1,22 @@
 {% extends 'base.html' %}
 
 {% block content %}
-
+<h1>Upravit dataci</h1>
+<p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('dating') }}" role="button">Zpet na prehled dataci</a></p>
+<form action name="add_dating" method="POST" class="form" role="form">
+    <div class="mb-3">
+        {{ form.parent_id.label(class="form-label") }}
+        {% if form.parent_id.data == 0 %}
+            {{ form.parent_id(class="form-control", disabled=True) }}
+        {% else %}
+            {{ form.parent_id(class="form-control") }}
+        {% endif %}
+    </div>
+    <div class="mb-3 required">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+    </div>
+    {{ form.hidden_tag() }}
+    <button type="submit" class="btn btn-outline-success btn-sm">Ulozit</button>
+</form>
 {% endblock %}
