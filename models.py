@@ -24,7 +24,28 @@ class Dating(Base):
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('dating.id'), default=0)
     title = Column(String, nullable=False, unique=True)
-    children = relationship('Dating', backref=backref('parent', remote_side=[id]))
+    children = relationship('Dating', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
+
+    def __init__(self, parent_id=None, title=None):
+        self.parent_id = parent_id
+        self.title = title
+
+    def __repr__(self):
+        return self.title
+
+    # format choices for parent_id select box
+    def select_choices(self):
+        choices = [(self.id, self.title)]
+        for child in self.children:
+            choices.extend([(child.id, f' -- {child.title}')])
+        return choices
+
+class Categories(Base):
+    __tablename__ = 'categories'
+    id = Column(Integer, primary_key=True)
+    parent_id = Column(Integer, ForeignKey('categories.id'), default=0)
+    title = Column(String, nullable=False, unique=True)
+    children = relationship('Categories', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
 
     def __init__(self, parent_id=None, title=None):
         self.parent_id = parent_id

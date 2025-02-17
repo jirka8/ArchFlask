@@ -1,0 +1,21 @@
+{%- macro render_modal(item_id, type='dating') -%}
+<div class="modal fade" id="deleteModal_{{ item_id }}" tabindex="-1" aria-labelledby=deleteModalLabel aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="deleteModalLabel">Opravdu chcete smazat tuto polozku?</h1>
+      </div>
+        <div class="modal-body">S touto polozkou budou smazany i pripadne podkategorie. Proto si tuto akci dobre rozmyslete.</div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-outline-success btn-sm" data-bs-dismiss="modal">Ne, nechci!</button>
+          {%- if type == "dating" -%}
+            <a class="btn btn-outline-danger btn-sm" href="{{ url_for('delete_dating', dating_id=item_id) }}" role="button">Smazat</a>
+          {%- endif -%}
+          {%- if type == "area" -%}
+            <a class="btn btn-outline-danger btn-sm" href="{{ url_for('delete_area', area_id=item_id) }}" role="button">Smazat</a>
+          {%- endif -%}
+      </div>
+    </div>
+  </div>
+</div>
+{%- endmacro -%}

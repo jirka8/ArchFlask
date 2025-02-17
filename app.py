@@ -1,8 +1,8 @@
-from random import choices
 from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, flash, redirect, url_for
+
 from database import db_session
-from models import Areas, Dating
+from models import Areas, Dating, Categories
 from forms import *
 from flask_wtf import CSRFProtect
 
@@ -67,7 +67,7 @@ def edit_area(area_id):
 
         if request.method == 'POST' and form.validate():
             area.title = form.title.data
-            area.decription = form.decription.data
+            area.description = form.decription.data
             db_session.add(area)
             db_session.commit()
             flash('Lokalita byla uspesne upravena.', 'success')
@@ -96,9 +96,10 @@ def delete_area(area_id):
 def dating():
     dating = Dating.query.filter(Dating.parent_id == 0).all()
     return render_template('dating.html', dating=dating)
-@app.route('/dating/add', methods=['GET', 'POST'])
-def add_dating():
-    form = DatingForm(request.form)
+@app.route('/dating/add', defaults={'parent_id': None}, methods=['GET', 'POST'])
+@app.route('/dating/add/<parent_id>', methods=['GET', 'POST'])
+def add_dating(parent_id):
+    form = DatingForm(request.form, parent_id=parent_id)
     parents = select_parents('dating')
     form.parent_id.choices = parents
 
@@ -134,12 +135,21 @@ def edit_dating(dating_id):
         return redirect(url_for('dating'))
 @app.route('/dating/delete/<dating_id>', methods=['GET', 'POST'])
 def delete_dating(dating_id):
-    return True
+    dating = Dating.query.get(dating_id)
+    if dating:
+        db_session.delete(dating)
+        db_session.commit()
+        flash('Datace byla uspesne smazana.', 'success')
+        return redirect(url_for('dating'))
+    else:
+        flash('Datace nenalezena!', 'error')
+        return redirect(url_for('dating'))
 
 #routes categories
 @app.route('/categories')
 def categories():
-    return render_template('categories.html')
+    categories = Categories.query.filter(Categories.parent_id == 0).all()
+    return render_template('categories.html', categories=categories)
 @app.route('/categories/add', methods=['GET', 'POST'])
 def add_category():
     return render_template('add_category.html')

@@ -5,6 +5,7 @@
 <p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_dating') }}" role="button">Pridat novou dataci</a></p>
 
 {% from 'bootstrap5/table.html' import render_table %}
+{% from 'macros.html' import render_modal %}
 
 <table class="table table-hover">
     <thead>
@@ -30,9 +31,10 @@
                                 <a class="icon-link" href="{{ url_for('edit_dating', dating_id=c.id) }}">
                                 <svg class="bi" aria-hidden="true"><use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#pencil-fill"></use></svg>
                                 </a>
-                                <a class="icon-link" href="{{ url_for('delete_dating', dating_id=c.id) }}"> <!--data-bs-toggle="modal" data-bs-target="#deleteModal"-->
+                                <a class="icon-link" href="{{ url_for('delete_dating', dating_id=c.id) }}" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ c.id }}">
                                 <svg class="bi" aria-hidden="true"><use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#trash-fill"></use></svg>
                                 </a>
+                                {{ render_modal(c.id) }}
                             </p>
                         </div>
                     </div>
@@ -47,9 +49,10 @@
                                         <a class="icon-link" href="{{ url_for('edit_dating', dating_id=cc.id) }}">
                                         <svg class="bi" aria-hidden="true"><use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#pencil-fill"></use></svg>
                                         </a>
-                                        <a class="icon-link" href="{{ url_for('delete_dating', dating_id=cc.id) }}"> <!--data-bs-toggle="modal" data-bs-target="#deleteModal"-->
+                                        <a class="icon-link" href="{{ url_for('delete_dating', dating_id=cc.id) }}" data-bs-toggle="modal" data-bs-target="#deleteModal_{{ cc.id }}">
                                         <svg class="bi" aria-hidden="true"><use xlink:href="/bootstrap/static/icons/bootstrap-icons.svg#trash-fill"></use></svg>
                                         </a>
+                                        {{ render_modal(cc.id) }}
                                     </p>
                                 </div>
                             </div>
@@ -57,14 +60,16 @@
                         {% endif %}
                 {% endfor %}
                 <div class="col-md-4">
-                    <a class="btn btn-outline-primary btn-sm" href="#" role="button">Pridat podkategorii</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_dating', parent_id=d.id) }}" role="button">Pridat podkategorii</a>
                 </div>
                 </div>
             </td>
             <td>
                 <div class="btn-group" role="group" aria-label="Basic example">
                     <a class="btn btn-outline-primary btn-sm" href="{{ url_for('edit_dating', dating_id=d.id) }}" role="button">Upravit</a>
-                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('delete_dating', dating_id=d.id) }}" role="button">Smazat</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('delete_dating', dating_id=d.id) }}" role="button"
+                       data-bs-toggle="modal" data-bs-target="#deleteModal_{{ d.id }}">Smazat</a>
+                    {{ render_modal(d.id) }}
                 </div>
             </td>
         </tr>
