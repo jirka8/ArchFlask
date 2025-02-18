@@ -4,12 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- editace datace&#10;- presun nacteni dat parent selectboxu do samostatne fce (poslouzi u categories)">
-      <change beforePath="$PROJECT_DIR$/.idea/ArchFlask.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/ArchFlask.iml" afterDir="false" />
+    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- rozdelane kategorie - potreba vyresit foreign key v tabulce - logicky nejde vkladat 0">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/areas.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/areas.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -59,21 +56,22 @@
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "DefaultHtmlFileTemplate": "HTML File",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "RunOnceActivity.git.unshallow": "true",
-    "git-widget-placeholder": "master",
-    "node.js.detected.package.eslint": "true",
-    "node.js.detected.package.tslint": "true",
-    "node.js.selected.package.eslint": "(autodetect)",
-    "node.js.selected.package.tslint": "(autodetect)",
-    "nodejs_package_manager_path": "npm",
-    "settings.editor.selected.configurable": "com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable",
-    "vue.rearranger.settings.migration": "true"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;ASKED_SHARE_PROJECT_CONFIGURATION_FILES&quot;: &quot;true&quot;,
+    &quot;DefaultHtmlFileTemplate&quot;: &quot;HTML File&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.git.unshallow&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;master&quot;,
+    &quot;node.js.detected.package.eslint&quot;: &quot;true&quot;,
+    &quot;node.js.detected.package.tslint&quot;: &quot;true&quot;,
+    &quot;node.js.selected.package.eslint&quot;: &quot;(autodetect)&quot;,
+    &quot;node.js.selected.package.tslint&quot;: &quot;(autodetect)&quot;,
+    &quot;nodejs_package_manager_path&quot;: &quot;npm&quot;,
+    &quot;settings.editor.selected.configurable&quot;: &quot;com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable&quot;,
+    &quot;vue.rearranger.settings.migration&quot;: &quot;true&quot;
   }
-}]]></component>
+}</component>
   <component name="SharedIndexes">
     <attachedChunks>
       <set>
@@ -100,7 +98,7 @@
       <workItem from="1739738774423" duration="7365000" />
       <workItem from="1739823851244" duration="2430000" />
       <workItem from="1739915661643" duration="713000" />
-      <workItem from="1739916393819" duration="1311000" />
+      <workItem from="1739916393819" duration="2103000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit - v0.01">
       <option name="closed" value="true" />
@@ -126,7 +124,15 @@
       <option name="project" value="LOCAL" />
       <updated>1739741244529</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="- rozdelane kategorie - potreba vyresit foreign key v tabulce - logicky nejde vkladat 0">
+      <option name="closed" value="true" />
+      <created>1739918868538</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1739918868538</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -147,6 +153,7 @@
     <MESSAGE value="Init commit - v0.01" />
     <MESSAGE value="- datace - dodelani tabulky, pridani formulare nakonec logicky wtfform, pridavani dataci vcetne vyberu rodice" />
     <MESSAGE value="- editace datace&#10;- presun nacteni dat parent selectboxu do samostatne fce (poslouzi u categories)" />
-    <option name="LAST_COMMIT_MESSAGE" value="- editace datace&#10;- presun nacteni dat parent selectboxu do samostatne fce (poslouzi u categories)" />
+    <MESSAGE value="- rozdelane kategorie - potreba vyresit foreign key v tabulce - logicky nejde vkladat 0" />
+    <option name="LAST_COMMIT_MESSAGE" value="- rozdelane kategorie - potreba vyresit foreign key v tabulce - logicky nejde vkladat 0" />
   </component>
 </project>
