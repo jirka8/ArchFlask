@@ -14,3 +14,8 @@ class DatingForm(FlaskForm):
     title = StringField('Nazev datace', validators=[validators.DataRequired()])
     parent_id = SelectField('Nadrazena kategorie', coerce=int, validate_choice=False)
     submit = SubmitField('Ulozit')
+
+class CategoryForm(FlaskForm):
+    title = StringField('Nazev kategorie', validators=[validators.DataRequired()])
+    parent_id = SelectField('Nadrazena kategorie', coerce=int, validate_choice=False)
+    submit = SubmitField('Ulozit')

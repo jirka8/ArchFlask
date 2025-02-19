@@ -1,7 +1,6 @@
 import datetime
 from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, CheckConstraint
 from database import Base
-from sqlalchemy.orm import DeclarativeBase
 from sqlalchemy.orm import relationship, backref
 
 
@@ -22,7 +21,7 @@ class Areas(Base):
 class Dating(Base):
     __tablename__ = 'dating'
     id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('dating.id'), default=0)
+    parent_id = Column(Integer, ForeignKey('dating.id'), nullable=True)
     title = Column(String, nullable=False, unique=True)
     children = relationship('Dating', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
 
@@ -34,16 +33,17 @@ class Dating(Base):
         return self.title
 
     # format choices for parent_id select box
-    def select_choices(self):
+    def select_choices(self, non_list = None):
         choices = [(self.id, self.title)]
         for child in self.children:
-            choices.extend([(child.id, f' -- {child.title}')])
+            if child.id != int(non_list):
+                choices.extend([(child.id, f' -- {child.title}')])
         return choices
 
 class Categories(Base):
     __tablename__ = 'categories'
     id = Column(Integer, primary_key=True)
-    parent_id = Column(Integer, ForeignKey('categories.id'), default=0)
+    parent_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     title = Column(String, nullable=False, unique=True)
     children = relationship('Categories', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
 

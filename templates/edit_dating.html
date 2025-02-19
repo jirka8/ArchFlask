@@ -6,7 +6,7 @@
 <form action name="add_dating" method="POST" class="form" role="form">
     <div class="mb-3">
         {{ form.parent_id.label(class="form-label") }}
-        {% if form.parent_id.data == 0 %}
+        {% if form.parent_id.data == None %}
             {{ form.parent_id(class="form-control", disabled=True) }}
         {% else %}
             {{ form.parent_id(class="form-control") }}

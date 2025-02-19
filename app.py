@@ -2,6 +2,7 @@ from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, flash, redirect, url_for
 
 from database import db_session
+from sqlalchemy import or_, and_
 from models import Areas, Dating, Categories
 from forms import *
 from flask_wtf import CSRFProtect
@@ -16,12 +17,17 @@ csrf = CSRFProtect(app)
 # bootstrap
 bootstrap = Bootstrap5(app)
 
-def select_parents(model):
-    p = [(0, 'Vyberte nadrazenou kategorii')]
+def select_parents(model, item_id = None):
+    p = [(0, 'Nema nadrazenou kategorii')]
     if model == 'dating':
-        dating = Dating.query.filter(Dating.parent_id == 0).all()
+        dating = Dating.query.filter(
+            or_(
+                Dating.parent_id == 0,
+                Dating.parent_id == None
+            )
+        ).all()
         for d in dating:
-            p.extend(Dating.select_choices(d))
+            p.extend(Dating.select_choices(d, item_id))
     return p
 
 # routes
@@ -94,7 +100,7 @@ def delete_area(area_id):
 #routes dating
 @app.route('/dating')
 def dating():
-    dating = Dating.query.filter(Dating.parent_id == 0).all()
+    dating = Dating.query.filter(or_(Dating.parent_id == 0, Dating.parent_id == None)).all()
     return render_template('dating.html', dating=dating)
 @app.route('/dating/add', defaults={'parent_id': None}, methods=['GET', 'POST'])
 @app.route('/dating/add/<parent_id>', methods=['GET', 'POST'])
@@ -104,7 +110,7 @@ def add_dating(parent_id):
     form.parent_id.choices = parents
 
     if request.method == 'POST' and form.validate():
-        d = Dating(form.parent_id.data, form.title.data)
+        d = Dating(form.parent_id.data if form.parent_id.data != 0 else None, form.title.data)
         db_session.add(d)
         db_session.commit()
         flash('Datace byla uspesne pridana.', 'success')
@@ -115,12 +121,12 @@ def edit_dating(dating_id):
     dating = Dating.query.get(dating_id)
     if dating:
         form = DatingForm(request.form)
-        parents = select_parents('dating')
+        parents = select_parents('dating', dating_id)
         form.parent_id.choices = parents
 
         if request.method == 'POST' and form.validate():
             dating.title = form.title.data
-            dating.parent_id = form.parent_id.data
+            dating.parent_id = form.parent_id.data if form.parent_id.data != 0 else None
             db_session.add(dating)
             db_session.commit()
             flash('Datace byla uspesne upravena.', 'success')
@@ -148,7 +154,7 @@ def delete_dating(dating_id):
 #routes categories
 @app.route('/categories')
 def categories():
-    categories = Categories.query.filter(Categories.parent_id == 0).all()
+    categories = Categories.query.filter(Categories.parent_id == None).all()
     return render_template('categories.html', categories=categories)
 @app.route('/categories/add', methods=['GET', 'POST'])
 def add_category():
