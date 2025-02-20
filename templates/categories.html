@@ -2,14 +2,14 @@
 
 {% block content %}
 <h1>Kategorie nalezu</h1>
-<p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_category') }}" role="button">Pridat kategorii</a></p>
+<p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_category') }}" role="button">Přidat kategorii</a></p>
 
 {% from 'macros.html' import render_modal %}
 
 <table class="table table-hover">
     <thead>
         <tr>
-            <th scope="col" class="col-3">Nazev</th>
+            <th scope="col" class="col-3">Název</th>
             <th scope="col">Podkategorie</th>
             <th scope="col" class="col-1"></th>
         </tr>
@@ -60,7 +60,7 @@
                         {% endif %}
                 {% endfor %}
                 <div class="col-md-4">
-                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_category', parent_id=cat.id) }}" role="button">Pridat podkategorii</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_category', parent_id=cat.id) }}" role="button">Přidat podkategorii</a>
                 </div>
                 </div>
             </td>
