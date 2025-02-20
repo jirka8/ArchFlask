@@ -4,15 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- vyresene NULL v parent_id u kategorizovani polozek&#10;- rozdelane karegorie&#10;- vyreseni vykreslovani choices">
+    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- administrace kategorii hotova&#10;- vyresena chyba v select_choices">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.db" beforeDir="false" afterPath="$PROJECT_DIR$/app.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/add_category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/categories.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/categories.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/edit_category.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_category.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/macros.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/macros.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -106,7 +100,7 @@
       <workItem from="1739915661643" duration="713000" />
       <workItem from="1739916393819" duration="2210000" />
       <workItem from="1739956998647" duration="6630000" />
-      <workItem from="1740089116115" duration="1901000" />
+      <workItem from="1740089116115" duration="2433000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit - v0.01">
       <option name="closed" value="true" />
@@ -156,7 +150,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740002956379</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="- administrace kategorii hotova&#10;- vyresena chyba v select_choices">
+      <option name="closed" value="true" />
+      <created>1740091081192</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1740091081192</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -180,6 +182,7 @@
     <MESSAGE value="- rozdelane kategorie - potreba vyresit foreign key v tabulce - logicky nejde vkladat 0" />
     <MESSAGE value="- upravene README.md" />
     <MESSAGE value="- vyresene NULL v parent_id u kategorizovani polozek&#10;- rozdelane karegorie&#10;- vyreseni vykreslovani choices" />
-    <option name="LAST_COMMIT_MESSAGE" value="- vyresene NULL v parent_id u kategorizovani polozek&#10;- rozdelane karegorie&#10;- vyreseni vykreslovani choices" />
+    <MESSAGE value="- administrace kategorii hotova&#10;- vyresena chyba v select_choices" />
+    <option name="LAST_COMMIT_MESSAGE" value="- administrace kategorii hotova&#10;- vyresena chyba v select_choices" />
   </component>
 </project>
