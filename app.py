@@ -17,7 +17,7 @@ csrf = CSRFProtect(app)
 # bootstrap
 bootstrap = Bootstrap5(app)
 
-def select_parents(model, item_id = None):
+def select_parents(model, item_id = 0):
     p = [(0, 'Nema nadrazenou kategorii')]
     if model == 'dating':
         dating = Dating.query.filter(
@@ -28,6 +28,15 @@ def select_parents(model, item_id = None):
         ).all()
         for d in dating:
             p.extend(Dating.select_choices(d, item_id))
+    if model == 'categories':
+        categories = Categories.query.filter(
+            or_(
+                Categories.parent_id == 0,
+                Categories.parent_id == None
+            )
+        ).all()
+        for c in categories:
+            p.extend(Categories.select_choices(c, item_id))
     return p
 
 # routes
@@ -156,15 +165,54 @@ def delete_dating(dating_id):
 def categories():
     categories = Categories.query.filter(Categories.parent_id == None).all()
     return render_template('categories.html', categories=categories)
-@app.route('/categories/add', methods=['GET', 'POST'])
-def add_category():
-    return render_template('add_category.html')
+@app.route('/categories/add', defaults={'parent_id': None}, methods=['GET', 'POST'])
+@app.route('/categories/add/<parent_id>', methods=['GET', 'POST'])
+def add_category(parent_id):
+    form = CategoryForm(request.form, parent_id=parent_id)
+    parents = select_parents('categories')
+    form.parent_id.choices = parents
+
+    if request.method == 'POST' and form.validate():
+        d = Categories(form.parent_id.data if form.parent_id.data != 0 else None, form.title.data)
+        db_session.add(d)
+        db_session.commit()
+        flash('Kategorie byla uspesne pridana.', 'success')
+        return redirect(url_for('categories'))
+    return render_template('add_category.html', form=form)
 @app.route('/categories/edit/<category_id>', methods=['GET', 'POST'])
 def edit_category(category_id):
-    return render_template('edit_category.html')
+    category = Categories.query.get(category_id)
+    if category:
+        form = CategoryForm(request.form)
+        parents = select_parents('categories', category_id)
+        form.parent_id.choices = parents
+
+        if request.method == 'POST' and form.validate():
+            category.title = form.title.data
+            category.parent_id = form.parent_id.data if form.parent_id.data != 0 else None
+            db_session.add(category)
+            db_session.commit()
+            flash('Kategorie byla uspesne upravena.', 'success')
+            return redirect(url_for('categories'))
+
+        form.title.data = category.title
+        form.parent_id.data = category.parent_id
+
+        return render_template('edit_category.html', form=form)
+    else:
+        flash('Kategorie nenalezena!', 'error')
+        return redirect(url_for('categories'))
 @app.route('/categories/delete/<category_id>', methods=['GET', 'POST'])
 def delete_category(category_id):
-    return True
+    category = Categories.query.get(category_id)
+    if category:
+        db_session.delete(category)
+        db_session.commit()
+        flash('Kategorie byla uspesne smazana.', 'success')
+        return redirect(url_for('categories'))
+    else:
+        flash('Kategorie nenalezena!', 'error')
+        return redirect(url_for('categories'))
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

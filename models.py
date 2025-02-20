@@ -33,7 +33,7 @@ class Dating(Base):
         return self.title
 
     # format choices for parent_id select box
-    def select_choices(self, non_list = None):
+    def select_choices(self, non_list = 0):
         choices = [(self.id, self.title)]
         for child in self.children:
             if child.id != int(non_list):
@@ -55,8 +55,10 @@ class Categories(Base):
         return self.title
 
     # format choices for parent_id select box
-    def select_choices(self):
+    def select_choices(self, non_list=0):
+        print(non_list)
         choices = [(self.id, self.title)]
         for child in self.children:
-            choices.extend([(child.id, f' -- {child.title}')])
+            if child.id != int(non_list):
+                choices.extend([(child.id, f' -- {child.title}')])
         return choices
