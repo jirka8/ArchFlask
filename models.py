@@ -22,7 +22,7 @@ class Dating(Base):
     __tablename__ = 'dating'
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('dating.id'), nullable=True)
-    title = Column(String, nullable=False, unique=True)
+    title = Column(String, nullable=False, unique=False)
     children = relationship('Dating', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
 
     def __init__(self, parent_id=None, title=None):
@@ -44,7 +44,7 @@ class Categories(Base):
     __tablename__ = 'categories'
     id = Column(Integer, primary_key=True)
     parent_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
-    title = Column(String, nullable=False, unique=True)
+    title = Column(String, nullable=False, unique=False)
     children = relationship('Categories', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
 
     def __init__(self, parent_id=None, title=None):
@@ -62,3 +62,10 @@ class Categories(Base):
             if child.id != int(non_list):
                 choices.extend([(child.id, f' -- {child.title}')])
         return choices
+
+#class Items(Base):
+#    __tablename__ = 'items'
+#    id = Column(Integer, primary_key=True)
+#    title = Column(String, nullable=False, unique=False)
+#    description = Column(String, nullable=False)
+#    found_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
