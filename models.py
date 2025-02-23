@@ -1,8 +1,22 @@
 import datetime
-from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, CheckConstraint
+from sqlalchemy import Column, Integer, String, DateTime, ForeignKey, CheckConstraint, Table
 from database import Base
 from sqlalchemy.orm import relationship, backref
+from geoalchemy2 import *
 
+items_categories = Table(
+    'items_categories',
+    Base.metadata,
+    Column('item_id', ForeignKey('items.id'), primary_key=True),
+    Column('category_id', ForeignKey('categories.id'), primary_key=True)
+)
+
+items_dating = Table(
+    'items_dating',
+    Base.metadata,
+    Column('item_id', ForeignKey('items.id'), primary_key=True),
+    Column('dating_id', ForeignKey('dating.id'), primary_key=True),
+)
 
 class Areas(Base):
     __tablename__ = 'areas'
@@ -24,6 +38,7 @@ class Dating(Base):
     parent_id = Column(Integer, ForeignKey('dating.id'), nullable=True)
     title = Column(String, nullable=False, unique=False)
     children = relationship('Dating', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
+    items = relationship('Items', secondary=items_dating, back_populates='dating', cascade='all, delete-orphan')
 
     def __init__(self, parent_id=None, title=None):
         self.parent_id = parent_id
@@ -46,6 +61,7 @@ class Categories(Base):
     parent_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     title = Column(String, nullable=False, unique=False)
     children = relationship('Categories', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
+    items = relationship('Items', secondary=items_categories, back_populates='categories', cascade='all, delete-orphan')
 
     def __init__(self, parent_id=None, title=None):
         self.parent_id = parent_id
@@ -63,9 +79,19 @@ class Categories(Base):
                 choices.extend([(child.id, f' -- {child.title}')])
         return choices
 
-#class Items(Base):
-#    __tablename__ = 'items'
-#    id = Column(Integer, primary_key=True)
-#    title = Column(String, nullable=False, unique=False)
-#    description = Column(String, nullable=False)
-#    found_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
+class Items(Base):
+    __tablename__ = 'items'
+    id = Column(Integer, primary_key=True)
+    title = Column(String, nullable=False, unique=False)
+    description = Column(String, nullable=False)
+    found_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
+    location = Column(Geometry('POINT', srid=4326))
+    categories = relationship('Categories', secondary=items_categories, back_populates='items', cascade='all, delete-orphan')
+    dating = relationship('Dating', secondary=items_dating, back_populates='items', cascade='all, delete-orphan')
+
+    def __init__(self, title=None, description=None):
+        self.title = title
+        self.description = description
+
+    def __repr__(self):
+        return f'<Item {self.title!r}>'
