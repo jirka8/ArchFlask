@@ -38,7 +38,7 @@ class Dating(Base):
     parent_id = Column(Integer, ForeignKey('dating.id'), nullable=True)
     title = Column(String, nullable=False, unique=False)
     children = relationship('Dating', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
-    items = relationship('Items', secondary=items_dating, back_populates='dating', cascade='delete')
+    items = relationship('Items', secondary=items_dating, back_populates='dating')
 
     def __init__(self, parent_id=None, title=None):
         self.parent_id = parent_id
@@ -61,7 +61,7 @@ class Categories(Base):
     parent_id = Column(Integer, ForeignKey('categories.id'), nullable=True)
     title = Column(String, nullable=False, unique=False)
     children = relationship('Categories', backref=backref('parent', remote_side=[id]), cascade='all, delete-orphan')
-    items = relationship('Items', secondary=items_categories, back_populates='categories', cascade='delete')
+    items = relationship('Items', secondary=items_categories, back_populates='categories')
 
     def __init__(self, parent_id=None, title=None):
         self.parent_id = parent_id
@@ -84,7 +84,7 @@ class Images(Base):
     id = Column(Integer, primary_key=True)
     item_id = Column(ForeignKey('items.id'), nullable=False)
     description = Column(String, nullable=True)
-    item = relationship('Items', back_populates='images', cascade='delete')
+    item = relationship('Items', back_populates='images')
 
     def __init__(self, description=None):
         self.description = description
@@ -99,9 +99,9 @@ class Items(Base):
     description = Column(String, nullable=False)
     found_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
     location = Column(Geometry('POINT', srid=4326))
-    categories = relationship('Categories', secondary=items_categories, back_populates='items', cascade='delete')
-    dating = relationship('Dating', secondary=items_dating, back_populates='items', cascade='delete')
-    images = relationship('Images', back_populates='item', cascade='delete')
+    categories = relationship('Categories', secondary=items_categories, back_populates='items')
+    dating = relationship('Dating', secondary=items_dating, back_populates='items')
+    images = relationship('Images', back_populates='item')
 
     def __init__(self, title=None, description=None):
         self.title = title
