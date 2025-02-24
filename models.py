@@ -99,6 +99,7 @@ class Items(Base):
     description = Column(String, nullable=False)
     found_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
     location = Column(Geometry('POINT', srid=4326))
+    area_id = Column(ForeignKey('areas.id'), nullable=False)
     categories = relationship('Categories', secondary=items_categories, back_populates='items')
     dating = relationship('Dating', secondary=items_dating, back_populates='items')
     images = relationship('Images', back_populates='item')
