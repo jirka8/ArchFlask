@@ -67,7 +67,7 @@ def areas():
 def add_area():
     form = AreasForm(request.form)
     if request.method == 'POST' and form.validate():
-        a = Areas(form.title.data, form.decription.data)
+        a = Areas(form.title.data, form.description.data)
         db_session.add(a)
         db_session.commit()
         flash('Lokalita byla uspesne pridana.', 'success')
@@ -82,14 +82,14 @@ def edit_area(area_id):
 
         if request.method == 'POST' and form.validate():
             area.title = form.title.data
-            area.description = form.decription.data
+            area.description = form.description.data
             db_session.add(area)
             db_session.commit()
             flash('Lokalita byla uspesne upravena.', 'success')
             return redirect(url_for('areas'))
 
         form.title.data = area.title
-        form.decription.data = area.description
+        form.description.data = area.description
         return render_template('edit_area.html', form=form)
     else:
         flash('Lokalita nenalezena!', 'error')

@@ -4,9 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- opravena chyba s cascade">
+    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- tak ted - aneb jak funguje cascada - pokud je relationship many-to-many pres spojovaci tabulku, tak neni potreba cascadu - tabulka se promaze a puvodni modely zustavaci (smazu kategorii, item zustane netknuty a naopak)">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/models.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/add_area.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_area.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/templates/edit_area.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/edit_area.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,7 +104,7 @@
       <workItem from="1739916393819" duration="2210000" />
       <workItem from="1739956998647" duration="6630000" />
       <workItem from="1740089116115" duration="7364000" />
-      <workItem from="1740335815951" duration="8345000" />
+      <workItem from="1740335815951" duration="8789000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit - v0.01">
       <option name="closed" value="true" />
@@ -215,7 +218,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740431895716</updated>
     </task>
-    <option name="localTasksCounter" value="15" />
+    <task id="LOCAL-00015" summary="- tak ted - aneb jak funguje cascada - pokud je relationship many-to-many pres spojovaci tabulku, tak neni potreba cascadu - tabulka se promaze a puvodni modely zustavaci (smazu kategorii, item zustane netknuty a naopak)">
+      <option name="closed" value="true" />
+      <created>1740432405479</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1740432405479</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -247,6 +258,7 @@
     <MESSAGE value="- prvni nastrel items modelu - doresit spravne ukladani gps z WGS84 (zatim to nevypada, ze by to ukladalo souradnice dobre)&#10;- pridani spojovacich tabulek pro categories a dating s items" />
     <MESSAGE value="- items model doplnen o obrazky&#10;- model pro obrazky - obrazky se nactou jako soucast Items modelu" />
     <MESSAGE value="- opravena chyba s cascade" />
-    <option name="LAST_COMMIT_MESSAGE" value="- opravena chyba s cascade" />
+    <MESSAGE value="- tak ted - aneb jak funguje cascada - pokud je relationship many-to-many pres spojovaci tabulku, tak neni potreba cascadu - tabulka se promaze a puvodni modely zustavaci (smazu kategorii, item zustane netknuty a naopak)" />
+    <option name="LAST_COMMIT_MESSAGE" value="- tak ted - aneb jak funguje cascada - pokud je relationship many-to-many pres spojovaci tabulku, tak neni potreba cascadu - tabulka se promaze a puvodni modely zustavaci (smazu kategorii, item zustane netknuty a naopak)" />
   </component>
 </project>

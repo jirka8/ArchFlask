@@ -2,7 +2,17 @@
 
 {% block content %}
 <h1>Upravit lokalitu</h1>
-<p><a class="btn btn-primary" href="{{ url_for('areas') }}" role="button">Zpet na prehled lokalit</a></p>
-{% from 'bootstrap5/form.html' import render_form %}
-{{ render_form(form) }}
+<p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('areas') }}" role="button">Zpet na prehled lokalit</a></p>
+<form action name="add_area" method="POST" class="form" role="form">
+    <div class="mb-3">
+        {{ form.title.label(class="form-label") }}
+        {{ form.title(class="form-control") }}
+    </div>
+    <div class="mb-3 required">
+        {{ form.description.label(class="form-label") }}
+        {{ form.description(class="form-control") }}
+    </div>
+    {{ form.hidden_tag() }}
+    <button type="submit" class="btn btn-outline-success btn-sm">Ulozit</button>
+</form>
 {% endblock %}
