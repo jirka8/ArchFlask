@@ -79,6 +79,19 @@ class Categories(Base):
                 choices.extend([(child.id, f' -- {child.title}')])
         return choices
 
+class Images(Base):
+    __tablename__ = 'images'
+    id = Column(Integer, primary_key=True)
+    item_id = Column(ForeignKey('items.id'), nullable=False)
+    description = Column(String, nullable=True)
+    item = relationship('Items', back_populates='images', cascade='all, delete-orphan')
+
+    def __init__(self, description=None):
+        self.description = description
+
+    def __repr__(self):
+        return self.description
+
 class Items(Base):
     __tablename__ = 'items'
     id = Column(Integer, primary_key=True)
@@ -88,6 +101,7 @@ class Items(Base):
     location = Column(Geometry('POINT', srid=4326))
     categories = relationship('Categories', secondary=items_categories, back_populates='items', cascade='all, delete-orphan')
     dating = relationship('Dating', secondary=items_dating, back_populates='items', cascade='all, delete-orphan')
+    images = relationship('Images', back_populates='item', cascade='all, delete-orphan')
 
     def __init__(self, title=None, description=None):
         self.title = title
