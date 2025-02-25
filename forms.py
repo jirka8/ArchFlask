@@ -25,7 +25,7 @@ class ItemsForm(FlaskForm):
     title = StringField('Nazev nálezu', validators=[validators.DataRequired()])
     description = TextAreaField('Popis nálezu', validators=[validators.DataRequired()])
     found_at = DateTimeField('Datum a čas nálezu', format='%m.%d.%Y T%H:%M')
-    location = TextAreaField('GPS souřadnice')
+    location = StringField('GPS souřadnice')
     area_id = SelectField('Lokalita', coerce=int, validate_choice=False)
     categories = SelectMultipleField('Kategorie', coerce=int)
     dating = SelectMultipleField('Datace', coerce=int)

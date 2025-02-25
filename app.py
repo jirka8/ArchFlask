@@ -51,7 +51,32 @@ def items():
     return render_template('items.html', items=items)
 @app.route('/items/add', methods=['GET', 'POST'])
 def add_item():
-    return render_template('add_item.html')
+    form = ItemsForm(request.form)
+    categories = Categories.query.filter(Categories.parent_id == None).all()
+    datings = Dating.query.filter(Dating.parent_id == None).all()
+    areas = Areas.query.all()
+
+    cat_choices = []
+    dat_choices = []
+    areas_choices = [(0, 'Nemá nastavenou lokalitu')]
+
+    for c in categories:
+        cat_choices.extend(c.select_choices())
+
+    for d in datings:
+        dat_choices.extend(d.select_choices())
+
+    for a in areas:
+        areas_choices.extend([(a.id, a.title)])
+
+    form.categories.choices = cat_choices
+    form.dating.choices = dat_choices
+    form.area_id.choices = areas_choices
+
+    if request.method == 'POST' and form.validate():
+        print(form.data)
+
+    return render_template('add_item.html', form=form)
 @app.route('/items/edit/<item_id>', methods=['GET', 'POST'])
 def edit_item(item_id):
     return render_template('edit_item.html')
