@@ -72,7 +72,6 @@ class Categories(Base):
 
     # format choices for parent_id select box
     def select_choices(self, non_list=0):
-        print(non_list)
         choices = [(self.id, self.title)]
         for child in self.children:
             if child.id != int(non_list):
@@ -99,7 +98,7 @@ class Items(Base):
     description = Column(String, nullable=False)
     found_at = Column(DateTime, nullable=False, default=datetime.datetime.now)
     location = Column(Geometry('POINT', srid=4326))
-    area_id = Column(ForeignKey('areas.id'), nullable=False)
+    area_id = Column(ForeignKey('areas.id'), nullable=True)
     categories = relationship('Categories', secondary=items_categories, back_populates='items')
     dating = relationship('Dating', secondary=items_dating, back_populates='items')
     images = relationship('Images', back_populates='item')
@@ -110,3 +109,7 @@ class Items(Base):
 
     def __repr__(self):
         return f'<Item {self.title!r}>'
+
+    def get_area(self):
+        area = Areas.query.get(self.area_id)
+        return area

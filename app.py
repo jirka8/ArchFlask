@@ -3,7 +3,7 @@ from flask import Flask, render_template, request, flash, redirect, url_for
 
 from database import db_session
 from sqlalchemy import or_, and_
-from models import Areas, Dating, Categories
+from models import Areas, Dating, Categories, Items
 from forms import *
 from flask_wtf import CSRFProtect
 
@@ -47,7 +47,8 @@ def index():
 # routes items
 @app.route('/items')
 def items():
-    return render_template('items.html')
+    items = Items.query.order_by(Items.found_at.desc()).all()
+    return render_template('items.html', items=items)
 @app.route('/items/add', methods=['GET', 'POST'])
 def add_item():
     return render_template('add_item.html')

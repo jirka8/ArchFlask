@@ -30,11 +30,11 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav mr-auto">
-                {{ render_nav_item('index', 'Hlavni stranka') }}
-                {{ render_nav_item('items', 'Nalezy') }}
-                {{ render_nav_item('categories', 'Kategorie') }}
+                {{ render_nav_item('index', 'Hlavní přehled') }}
+                {{ render_nav_item('items', 'Katalog nálezů') }}
                 {{ render_nav_item('areas', 'Lokality') }}
-                {{ render_nav_item('dating', 'Datace nalezu') }}
+                {{ render_nav_item('categories', 'Kategorie nálezů') }}
+                {{ render_nav_item('dating', 'Datace nálezů') }}
             </ul>
         </div>
         </div>
@@ -47,7 +47,6 @@
 
     <footer class="text-center">
         {% block footer %}
-
         {% endblock %}
     </footer>
 

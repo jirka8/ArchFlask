@@ -1,5 +1,61 @@
 {% extends 'base.html' %}
 
 {% block content %}
-<h1>Katalog nalezu</h1>
+<h1>Katalog nálezů</h1>
+<p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('add_item') }}" role="button">Pridat nález</a></p>
+
+{% from 'macros.html' import render_modal %}
+
+<table class="table table-hover">
+    <thead>
+        <tr>
+            <th scope="col" class="col-1">Název</th>
+            <th scope="col" class="col-2">Popis</th>
+            <th scope="col" class="col-1">Lokalita</th>
+            <th scope="col" class="col-2">Kategorie</th>
+            <th scope="col" class="col-2">Datace</th>
+            <th scope="col" class="col-1">Datum</th>
+            <th scope="col" class="col-1"></th>
+        </tr>
+    </thead>
+    <tbody>
+    {% for i in items %}
+        <tr>
+            <td>{{i.title}}</td>
+            <td>{{i.description}}</td>
+            <td>
+                {%- if i.get_area() -%}
+                    {{ i.get_area().title }}
+                {%- else -%}
+                    Není nastavena
+                {%- endif -%}
+            </td>
+            <td>
+                <ul class="list-group">
+                    {% for c in i.categories %}
+                    <li class="list-group-item">{{ c.title }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>
+                <ul class="list-group">
+                    {% for d in i.dating %}
+                    <li class="list-group-item">{{ d.title }}</li>
+                    {% endfor %}
+                </ul>
+            </td>
+            <td>{{i.found_at.strftime("%d.%m.%Y")}}</td>
+            <td>
+                <div class="btn-group" role="group" aria-label="Basic example">
+                    <a class="btn btn-outline-primary btn-sm" href="" role="button">Detail</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('edit_item', item_id=i.id) }}" role="button">Upravit</a>
+                    <a class="btn btn-outline-primary btn-sm" href="{{ url_for('delete_item', item_id=i.id) }}" role="button"
+                       data-bs-toggle="modal" data-bs-target="#deleteModal_{{ i.id }}">Smazat</a>
+                    {{ render_modal(i.id, 'item') }}
+                </div>
+            </td>
+        </tr>
+    {% endfor %}
+    </tbody>
+</table>
 {% endblock %}
