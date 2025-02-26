@@ -81,15 +81,16 @@ class Categories(Base):
 class Images(Base):
     __tablename__ = 'images'
     id = Column(Integer, primary_key=True)
+    file_name = Column(String, nullable=False)
     item_id = Column(ForeignKey('items.id'), nullable=False)
     description = Column(String, nullable=True)
     item = relationship('Items', back_populates='images')
 
-    def __init__(self, description=None):
-        self.description = description
+    def __init__(self, file_name=None):
+        self.file_name = file_name
 
     def __repr__(self):
-        return self.description
+        return self.file_name
 
 class Items(Base):
     __tablename__ = 'items'
