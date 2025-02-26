@@ -4,35 +4,47 @@
 <h1>Přidat nový nález</h1>
 <p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('items') }}" role="button">Zpět na přehled nálezů</a></p>
 <form action name="add_item" method="POST" class="form" role="form">
-    <div class="mb-3 required">
-        {{ form.title.label(class="form-label") }}
-        {{ form.title(class="form-control") }}
+    <div class="container">
+        <div class="row pb-3">
+            <div class="col-3 required">
+                {{ form.title.label(class="form-label") }}
+                {{ form.title(class="form-control") }}
+            </div>
+            <div class="col required">
+                {{ form.description.label(class="form-label") }}
+                {{ form.description(class="form-control") }}
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col-3">
+                {{ form.images.label(class="form-label") }}
+                {{ form.images(class="form-control") }}
+            </div>
+            <div class="col-3">
+                {{ form.location.label(class="form-label") }}
+                {{ form.location(class="form-control") }}
+            </div>
+            <div class="col">
+                {{ form.area_id.label(class="form-label") }}
+                {{ form.area_id(class="form-control") }}
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                {{ form.categories.label(class="form-label") }}
+                {{ form.categories(class="form-control") }}
+            </div>
+            <div class="col">
+                {{ form.dating.label(class="form-label") }}
+                {{ form.dating(class="form-control") }}
+            </div>
+        </div>
+        <div class="row pb-3">
+            <div class="col">
+                {{ form.hidden_tag() }}
+                <button type="submit" class="btn btn-outline-success btn-sm">Uložit nález</button>
+            </div>
+        </div>
     </div>
-    <div class="mb-3 required">
-        {{ form.description.label(class="form-label") }}
-        {{ form.description(class="form-control") }}
-    </div>
-    <div class="mb-3">
-        {{ form.location.label(class="form-label") }}
-        {{ form.location(class="form-control") }}
-    </div>
-    <div class="mb-3">
-        {{ form.area_id.label(class="form-label") }}
-        {{ form.area_id(class="form-control") }}
-    </div>
-    <div class="mb-3">
-        {{ form.categories.label(class="form-label") }}
-        {{ form.categories(class="form-control") }}
-    </div>
-    <div class="mb-3">
-        {{ form.dating.label(class="form-label") }}
-        {{ form.dating(class="form-control") }}
-    </div>
-    <div class="mb-3">
-        {{ form.images.label(class="form-label") }}
-        {{ form.images(class="form-control") }}
-    </div>
-    {{ form.hidden_tag() }}
-    <button type="submit" class="btn btn-outline-success btn-sm">Ulozit</button>
 </form>
 {% endblock %}
