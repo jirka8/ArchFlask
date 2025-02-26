@@ -4,11 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- prehled nalezu&#10;- drobne upravy&#10;- ItemsForm">
+    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- render formulare pro pridani Items">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/forms.py" beforeDir="false" afterPath="$PROJECT_DIR$/forms.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/add_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_item.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/database.py" beforeDir="false" afterPath="$PROJECT_DIR$/database.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -103,7 +101,7 @@
       <workItem from="1739916393819" duration="2210000" />
       <workItem from="1739956998647" duration="6630000" />
       <workItem from="1740089116115" duration="7364000" />
-      <workItem from="1740335815951" duration="15715000" />
+      <workItem from="1740335815951" duration="16812000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit - v0.01">
       <option name="closed" value="true" />
@@ -249,7 +247,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740522523876</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="- render formulare pro pridani Items">
+      <option name="closed" value="true" />
+      <created>1740524230426</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1740524230426</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -285,6 +291,7 @@
     <MESSAGE value="- formular pro lokality do verze, kterou pouzivaji ostatni (historicky byl spatne) + oprava preklepu" />
     <MESSAGE value="- area_id column do Items" />
     <MESSAGE value="- prehled nalezu&#10;- drobne upravy&#10;- ItemsForm" />
-    <option name="LAST_COMMIT_MESSAGE" value="- prehled nalezu&#10;- drobne upravy&#10;- ItemsForm" />
+    <MESSAGE value="- render formulare pro pridani Items" />
+    <option name="LAST_COMMIT_MESSAGE" value="- render formulare pro pridani Items" />
   </component>
 </project>
