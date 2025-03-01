@@ -12,7 +12,7 @@
             </div>
             <div class="col required">
                 {{ form.description.label(class="form-label") }}
-                {{ form.description(class="form-control") }}
+                {{ form.description(class="form-control", rows="4") }}
             </div>
         </div>
         <div class="row pb-3">
@@ -36,11 +36,11 @@
         <div class="row pb-3">
             <div class="col">
                 {{ form.categories.label(class="form-label") }}
-                {{ form.categories(class="form-control") }}
+                {{ form.categories(class="form-control", size="8") }}
             </div>
             <div class="col">
                 {{ form.dating.label(class="form-label") }}
-                {{ form.dating(class="form-control") }}
+                {{ form.dating(class="form-control", size="8") }}
             </div>
         </div>
         <div class="row pb-3">

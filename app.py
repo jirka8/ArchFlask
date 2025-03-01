@@ -76,9 +76,7 @@ def add_item():
     if request.method == 'POST' and form.validate():
         #item = Items(form.title.data, form.description.data)
         print(form.data)
-    else:
-        print(form.data)
-        print(form.errors)
+
 
     return render_template('add_item.html', form=form)
 @app.route('/items/edit/<item_id>', methods=['GET', 'POST'])
