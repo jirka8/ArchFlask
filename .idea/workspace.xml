@@ -4,10 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- fix vyberu datumu nalezu - vyhozeni datepickeru a pouziti DateTimeLocalField">
+    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- srovnavacka">
+      <change afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/add_item.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/add_item.html" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -17,8 +17,8 @@
   <component name="FileTemplateManagerImpl">
     <option name="RECENT_TEMPLATES">
       <list>
-        <option value="Python Script" />
         <option value="HTML File" />
+        <option value="Python Script" />
       </list>
     </option>
   </component>
@@ -105,7 +105,7 @@
       <workItem from="1740335815951" duration="17038000" />
       <workItem from="1740601754580" duration="5547000" />
       <workItem from="1740609970601" duration="1370000" />
-      <workItem from="1740864752937" duration="2440000" />
+      <workItem from="1740864752937" duration="4096000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit - v0.01">
       <option name="closed" value="true" />
@@ -299,7 +299,15 @@
       <option name="project" value="LOCAL" />
       <updated>1740611630954</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="- srovnavacka">
+      <option name="closed" value="true" />
+      <created>1740868892983</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1740868892983</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -341,6 +349,7 @@
     <MESSAGE value="- skoro final formulare pro pridani nalezu" />
     <MESSAGE value="- final formulare pro pridani nalezu" />
     <MESSAGE value="- fix vyberu datumu nalezu - vyhozeni datepickeru a pouziti DateTimeLocalField" />
-    <option name="LAST_COMMIT_MESSAGE" value="- fix vyberu datumu nalezu - vyhozeni datepickeru a pouziti DateTimeLocalField" />
+    <MESSAGE value="- srovnavacka" />
+    <option name="LAST_COMMIT_MESSAGE" value="- srovnavacka" />
   </component>
 </project>
