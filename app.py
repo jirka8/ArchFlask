@@ -1,8 +1,9 @@
 from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, flash, redirect, url_for
+from flask_sqlalchemy import SQLAlchemy
 
-from database import db_session
-from sqlalchemy import or_, and_
+from database import db_session, DB_URL
+from sqlalchemy import or_, and_, insert, update, delete
 from models import Areas, Dating, Categories, Items
 from forms import *
 from flask_wtf import CSRFProtect
@@ -12,7 +13,8 @@ from functions import *
 app = Flask(__name__)
 app.config["SECRET_KEY"] = "abracadabra"
 app.config['BOOTSTRAP_BOOTSWATCH_THEME'] = 'united'
-
+app.config['SQLALCHEMY_DATABASE_URI'] = DB_URL
+db = SQLAlchemy(app)
 csrf = CSRFProtect(app)
 
 # bootstrap
@@ -26,7 +28,9 @@ def index():
 # routes items
 @app.route('/items')
 def items():
-    items = Items.query.order_by(Items.found_at.desc()).all()
+    page = request.args.get('page', 1, type=int)
+    query = db.session.query(Items).order_by(Items.found_at.desc())
+    items = db.paginate(query, page=page, per_page=10)
     return render_template('items.html', items=items)
 @app.route('/items/add', methods=['GET', 'POST'])
 def add_item():
@@ -34,10 +38,23 @@ def add_item():
     form = prepare_item_form()
 
     if request.method == 'POST' and form.validate():
-        # set model
+        # set and save model
         item = Items()
-        print(form.data)
-
+        item.title = form.title.data
+        item.description = form.description.data
+        if form.location.data:
+            item.location = form.location.data
+        item.found_at = form.found_at.data
+        item.area_id = form.area_id.data if form.area_id.data != 0 else None
+        db_session.add(item)
+        db_session.commit()
+        # save categories and etc.
+        save_item_categories(form.categories.data, item.id)
+        save_item_dating(form.dating.data, item.id)
+        save_item_images(request.files, item.id)
+        # flash message and redirect
+        flash('Nález byl úspěšně uložený.', 'success')
+        return redirect(url_for('items'))
 
     return render_template('add_item.html', form=form)
 @app.route('/items/edit/<item_id>', methods=['GET', 'POST'])

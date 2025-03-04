@@ -3,7 +3,7 @@
 {% block content %}
 <h1>Přidat nový nález</h1>
 <p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('items') }}" role="button">Zpět na přehled nálezů</a></p>
-<form action name="add_item" method="POST" class="form" role="form">
+<form action name="add_item" method="POST" enctype="multipart/form-data" class="form" role="form">
     <div class="container">
         <div class="row pb-3">
             <div class="col-3 required">
