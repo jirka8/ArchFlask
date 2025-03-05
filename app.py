@@ -1,6 +1,9 @@
 from flask_bootstrap import Bootstrap5
 from flask import Flask, render_template, request, flash, redirect, url_for
 from flask_sqlalchemy import SQLAlchemy
+from geoalchemy2.shape import to_shape
+from markupsafe import Markup
+import folium
 
 from database import db_session, DB_URL
 from sqlalchemy import or_, and_, insert, update, delete
@@ -25,6 +28,11 @@ bootstrap = Bootstrap5(app)
 def index():
     return render_template('index.html')
 
+# templates filters
+@app.template_filter('render_map')
+def render_map(map_obj):
+    return Markup(map_obj._repr_html_())
+
 # routes items
 @app.route('/items')
 def items():
@@ -32,6 +40,23 @@ def items():
     query = db.session.query(Items).order_by(Items.found_at.desc())
     items = db.paginate(query, page=page, per_page=10)
     return render_template('items.html', items=items)
+@app.route('/items/<item_id>')
+def view_item(item_id):
+    item = Items.query.get(item_id)
+    #print(parse_coordinates_to_readable(to_shape(item.location)))
+    point = to_shape(item.location)
+    lon = point.x
+    lat = point.y
+
+    m = folium.Map(location=[lat, lon], zoom_start=15)
+
+    folium.Marker(
+        location=[lat, lon],
+        popup=f"<b>{item.title}</b>",
+        tooltip=item.title
+    ).add_to(m)
+
+    return render_template('view_item.html', item=item, map=m)
 @app.route('/items/add', methods=['GET', 'POST'])
 def add_item():
     # prepare and fill form

@@ -116,3 +116,14 @@ def parse_coordinates(lat_str, lon_str):
         longitude = float(lon_str)
 
     return latitude, longitude
+
+# parse coordinates to readable format
+def parse_coordinates_to_readable(coordinates):
+    # extract from to_shape()
+    lon = coordinates.x
+    lat = coordinates.y
+
+    # make it readable
+    lat_dir = 'N' if lat >= 0 else 'S'
+    lon_dir = 'E' if lon >= 0 else 'W'
+    return f"{abs(lat):.7f}{lat_dir}, {abs(lon):.7f}{lon_dir}"

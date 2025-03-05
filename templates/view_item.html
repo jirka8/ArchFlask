@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Detail nálezu: {{item.title}}</h1>
+<div class="row">
+    <div class="col-md-2">
+        <p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('items') }}" role="button">Zpět na přehled nálezů</a></p>
+    </div>
+    <div class="col-md-2">
+        <p><a class="btn btn-outline-primary btn-sm" href="{{ url_for('items') }}" role="button">Exportovat detail jako PDF</a></p>
+    </div>
+</div>
+<div class="container">
+    <div class="row">
+        <div class="col">
+            <p>{{item.description}}</p>
+        </div>
+        <div class="col-md-6">
+            {{ map|render_map }}
+        </div>
+    </div>
+</div>
+{% endblock %}
