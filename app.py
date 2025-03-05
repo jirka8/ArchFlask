@@ -38,27 +38,31 @@ def add_item():
     form = prepare_item_form()
 
     if request.method == 'POST' and form.validate():
-        # set and save model
-        item = Items()
-        item.title = form.title.data
-        item.description = form.description.data
-        if form.location.data:
-            # process lat,lon
-            lat_str, lon_str = parse_coordinates_from_input(form.location.data)
-            lat, lon = parse_coordinates(lat_str, lon_str)
-            wkt_point = f'POINT({lon} {lat})'
-            item.location = wkt_point
-        item.found_at = form.found_at.data
-        item.area_id = form.area_id.data if form.area_id.data != 0 else None
-        db_session.add(item)
-        db_session.commit()
-        # save categories and etc.
-        save_item_categories(form.categories.data, item.id)
-        save_item_dating(form.dating.data, item.id)
-        save_item_images(request.files, item.id)
-        # flash message and redirect
-        flash('Nález byl úspěšně uložený.', 'success')
-        return redirect(url_for('items'))
+        try:
+            # set and save model
+            item = Items()
+            item.title = form.title.data
+            item.description = form.description.data
+            if form.location.data:
+                # process lat,lon
+                lat_str, lon_str = parse_coordinates_from_input(form.location.data)
+                lat, lon = parse_coordinates(lat_str, lon_str)
+                wkt_point = f'POINT({lon} {lat})'
+                item.location = wkt_point
+            item.found_at = form.found_at.data
+            item.area_id = form.area_id.data if form.area_id.data != 0 else None
+            db_session.add(item)
+            db_session.commit()
+            # save categories and etc.
+            save_item_categories(form.categories.data, item.id)
+            save_item_dating(form.dating.data, item.id)
+            save_item_images(request.files, item.id)
+            # flash message and redirect
+            flash('Nález byl úspěšně uložený.', 'success')
+            return redirect(url_for('items'))
+        except Exception as e:
+            db.session.rollback()
+            flash(f'Při ukládání se vyskytly následující chyby: {str(e)}', 'error')
 
     return render_template('add_item.html', form=form)
 @app.route('/items/edit/<item_id>', methods=['GET', 'POST'])

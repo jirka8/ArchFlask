@@ -22,7 +22,10 @@
             </div>
             <div class="col-3">
                 {{ form.location.label(class="form-label") }}
-                {{ form.location(class="form-control") }}
+                {{ form.location(class="form-control", placeholder="např. 49.4375331N, 15.2184831E") }}
+                <!--<div class="invalid-feedback">
+                    Please choose a username.
+                </div>-->
             </div>
             <div class="col-3">
                 {{ form.found_at.label(class="form-label") }}
