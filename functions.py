@@ -75,6 +75,7 @@ def save_item_dating(dating, item_id):
         db_session.execute(insert(items_dating).values(item_id=item_id, dating_id=d))
         db_session.commit()
 
+# save items images
 def save_item_images(images, item_id):
     save_path = f'{os.getcwd()}/photos'
     for image in images.getlist('images'):
@@ -88,3 +89,30 @@ def save_item_images(images, item_id):
 
             db_session.add(i)
             db_session.commit()
+
+# gps coordinates parser (to lat and lon str)
+def parse_coordinates_from_input(coordinates):
+    parts = [part.strip() for part in coordinates.split(',')]
+    if len(parts) != 2:
+        raise ValueError('Souřadnice musí být ve tvaru x,y!')
+    return parts[0], parts[1]
+
+# parse coordinates for db
+def parse_coordinates(lat_str, lon_str):
+    # latitude
+    if lat_str.endswith('N'):
+        latitude = float(lat_str[:-1])
+    elif lat_str.endswith('S'):
+        latitude = -float(lat_str[:-1])
+    else:
+        latitude = float(lat_str)
+
+    # longitude
+    if lon_str.endswith('E'):
+        longitude = float(lon_str[:-1])
+    elif lon_str.endswith('W'):
+        longitude = -float(lon_str[:-1])
+    else:
+        longitude = float(lon_str)
+
+    return latitude, longitude

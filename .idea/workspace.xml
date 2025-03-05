@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- add .gitignore&#10;- finished items add&#10;- first try to implement pagination&#10;- @TODO - add __init__.py with every important app configuration and imports">
+    <list default="true" id="dab8df25-697e-437f-a09f-15d4c15fa4bb" name="Changes" comment="- render_pager instead render_pagination">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/templates/items.html" beforeDir="false" afterPath="$PROJECT_DIR$/templates/items.html" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/app.py" beforeDir="false" afterPath="$PROJECT_DIR$/app.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/functions.py" beforeDir="false" afterPath="$PROJECT_DIR$/functions.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -108,7 +109,8 @@
       <workItem from="1740949175827" duration="4923000" />
       <workItem from="1740956891438" duration="244000" />
       <workItem from="1740957148607" duration="2451000" />
-      <workItem from="1741121347381" duration="6265000" />
+      <workItem from="1741121347381" duration="6329000" />
+      <workItem from="1741208714995" duration="1350000" />
     </task>
     <task id="LOCAL-00001" summary="Init commit - v0.01">
       <option name="closed" value="true" />
@@ -326,7 +328,15 @@
       <option name="project" value="LOCAL" />
       <updated>1741128759218</updated>
     </task>
-    <option name="localTasksCounter" value="28" />
+    <task id="LOCAL-00028" summary="- render_pager instead render_pagination">
+      <option name="closed" value="true" />
+      <created>1741129341226</created>
+      <option name="number" value="00028" />
+      <option name="presentableId" value="LOCAL-00028" />
+      <option name="project" value="LOCAL" />
+      <updated>1741129341226</updated>
+    </task>
+    <option name="localTasksCounter" value="29" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -344,7 +354,6 @@
     </option>
   </component>
   <component name="VcsManagerConfiguration">
-    <MESSAGE value="- editace datace&#10;- presun nacteni dat parent selectboxu do samostatne fce (poslouzi u categories)" />
     <MESSAGE value="- rozdelane kategorie - potreba vyresit foreign key v tabulce - logicky nejde vkladat 0" />
     <MESSAGE value="- upravene README.md" />
     <MESSAGE value="- vyresene NULL v parent_id u kategorizovani polozek&#10;- rozdelane karegorie&#10;- vyreseni vykreslovani choices" />
@@ -369,6 +378,7 @@
     <MESSAGE value="- srovnavacka" />
     <MESSAGE value="- pomocne funkce do functions.py (tohle jeste mozna nejak predelam)" />
     <MESSAGE value="- add .gitignore&#10;- finished items add&#10;- first try to implement pagination&#10;- @TODO - add __init__.py with every important app configuration and imports" />
-    <option name="LAST_COMMIT_MESSAGE" value="- add .gitignore&#10;- finished items add&#10;- first try to implement pagination&#10;- @TODO - add __init__.py with every important app configuration and imports" />
+    <MESSAGE value="- render_pager instead render_pagination" />
+    <option name="LAST_COMMIT_MESSAGE" value="- render_pager instead render_pagination" />
   </component>
 </project>

@@ -43,7 +43,11 @@ def add_item():
         item.title = form.title.data
         item.description = form.description.data
         if form.location.data:
-            item.location = form.location.data
+            # process lat,lon
+            lat_str, lon_str = parse_coordinates_from_input(form.location.data)
+            lat, lon = parse_coordinates(lat_str, lon_str)
+            wkt_point = f'POINT({lon} {lat})'
+            item.location = wkt_point
         item.found_at = form.found_at.data
         item.area_id = form.area_id.data if form.area_id.data != 0 else None
         db_session.add(item)
