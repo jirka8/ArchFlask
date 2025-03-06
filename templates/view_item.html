@@ -13,10 +13,94 @@
 <div class="container">
     <div class="row">
         <div class="col">
-            <p>{{item.description}}</p>
+            <div class="row">
+                <div class="col-3 pt-3">
+                    <h4>Popis nálezu</h4>
+                </div>
+                <div class="col pt-3">
+                    <p>{{item.description}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 pt-3">
+                    <h4>Nalezeno</h4>
+                </div>
+                <div class="col pt-3">
+                    <p>{{item.found_at.strftime("%d.%m.%Y")}}</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 pt-3">
+                    <h4>Kategorie</h4>
+                </div>
+                <div class="col pt-3">
+                    <ul class="list-group list-group-horizontal">
+                        {% if item.categories %}
+                            {% for c in item.categories %}
+                            <li class="list-group-item">{{ c.title }}</li>
+                            {% endfor %}
+                        {% else %}
+                            <li class="list-group-item">Zatím nezařazeno</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 pt-3">
+                    <h4>Datace</h4>
+                </div>
+                <div class="col pt-3">
+                    <ul class="list-group list-group-horizontal">
+                        {% if item.dating %}
+                        {% for d in item.dating %}
+                            <li class="list-group-item">{{ d.title }}</li>
+                        {% endfor %}
+                        {% else %}
+                            <li class="list-group-item list-group-item-secondary">Zatím nedatováno</li>
+                        {% endif %}
+                    </ul>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-3 pt-3">
+                    <h4>Lokalita</h4>
+                </div>
+                <div class="col pt-3">
+                    {% if item.get_area() %}
+                        <p>{{ item.get_area() }}</p>
+                    {% else %}
+                        <p>Není přiřazen k žádné lokalitě.</p>
+                    {% endif %}
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
+            <h4>Mapa</h4>
             {{ map|render_map }}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col pt-3">
+            <h4>Fotografie</h4>
+            {% if item.images %}
+            <div id="carouselExample" class="carousel slide">
+                <div class="carousel-inner">
+                    {% for image in item.images %}
+                    <div class="carousel-item {% if loop.index == 1 %} active{% endif %}">
+                        <img src="{{ url_for('photos', image_id=image.id) }}" class="d-block w-100" alt="...">
+                    </div>
+                    {% endfor %}
+                </div>
+                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExample" data-bs-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Předchozí</span>
+                </button>
+                <button class="carousel-control-next" type="button" data-bs-target="#carouselExample" data-bs-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="visually-hidden">Další</span>
+                </button>
+            </div>
+            {% endif %}
         </div>
     </div>
 </div>

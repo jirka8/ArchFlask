@@ -1,5 +1,5 @@
 from flask_bootstrap import Bootstrap5
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request, flash, redirect, url_for, send_from_directory
 from flask_sqlalchemy import SQLAlchemy
 from geoalchemy2.shape import to_shape
 from markupsafe import Markup
@@ -252,6 +252,12 @@ def delete_category(category_id):
     else:
         flash('Kategorie nenalezena!', 'error')
         return redirect(url_for('categories'))
+
+@app.route('/photos/<image_id>')
+def photos(image_id):
+    image = Images.query.get(image_id)
+    print(app.root_path + '/photos/' + image.file_name)
+    return send_from_directory(app.root_path + '/photos/', image.file_name, conditional=True)
 
 @app.teardown_appcontext
 def shutdown_session(exception=None):

@@ -4,6 +4,7 @@ from database import db_session
 from models import *
 from forms import *
 import os
+import random, string
 from werkzeug.utils import secure_filename
 
 # input data for form parent select
@@ -80,13 +81,23 @@ def save_item_images(images, item_id):
     save_path = f'{os.getcwd()}/photos'
     for image in images.getlist('images'):
         if image.filename != '':
+            # Extract file extension from original filename
+            _, file_extension = os.path.splitext(image.filename)
+            
+            # Create new Images DB object
             i = Images()
-            i.file_name = f'{item_id}_{image.filename}'
+            
+            # Generate random string for filename
+            rnd = ''.join(random.choices(string.ascii_uppercase + string.digits, k=8))
+            
+            # Set filename with random string and original extension
+            i.file_name = f'{item_id}_{rnd}{file_extension}'
             i.item_id = item_id
-
+            
+            # Secure the filename and save the file
             filename = secure_filename(i.file_name)
             image.save(os.path.join(save_path, filename))
-
+            
             db_session.add(i)
             db_session.commit()
 
